@@ -9,6 +9,8 @@ DEBUG = False
 
 ALLOWED_HOSTS = ['127.0.0.1', 's.halanx.com']
 
+SHORT_URL_DOMAIN = "s.halanx.com"
+
 # Environment Settings
 ENVIRONMENT = PRODUCTION
 ENVIRONMENT_NAME = 'PRODUCTION ENVIRONMENT'

@@ -49,7 +49,7 @@ class UrlManager(models.Manager):
 
 class Url(models.Model):
     url = models.CharField(max_length=3000000, validators=[valid_url], blank=True, null=True)
-    short = models.CharField(max_length=100000000, unique=True, blank=True)
+    short = models.CharField(max_length=255, unique=True, blank=True)
     updated = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)
     active = models.BooleanField(default=True)

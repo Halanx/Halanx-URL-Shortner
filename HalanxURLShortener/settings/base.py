@@ -20,6 +20,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -87,3 +88,6 @@ USE_TZ = True
 SITE_ID = 1
 
 LOGIN_URL = '/login/'
+
+# CORS Settings
+CORS_ORIGIN_ALLOW_ALL = True

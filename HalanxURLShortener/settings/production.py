@@ -7,9 +7,9 @@ from .base import *
 
 DEBUG = False
 
-ALLOWED_HOSTS = ['127.0.0.1', 's.halanx.com']
+ALLOWED_HOSTS = ['127.0.0.1', 'hlnx.me']
 
-SHORT_URL_DOMAIN = 'https://s.halanx.com'
+SHORT_URL_DOMAIN = 'https://hlnx.me'
 
 # Environment Settings
 ENVIRONMENT = PRODUCTION

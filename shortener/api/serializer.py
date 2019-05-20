@@ -14,7 +14,7 @@ class URLSerializer(serializers.ModelSerializer):
             'active',
             'count',
         ]
-        read_only_fields = ['count', 'short']
+        read_only_fields = ['count', ]
 
     @staticmethod
     def validate_url(value):

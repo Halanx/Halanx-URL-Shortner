@@ -1,10 +1,13 @@
+from decouple import config
 from django.contrib import messages
 from django.http import HttpResponseRedirect, HttpResponse, JsonResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views import View
 
 from shortener.forms import SubmitUrl
 from shortener.models import Url
+from utility.url_utils import build_url
+import urllib.parse
 
 
 def redirect_view(request, shortcode=None):
@@ -66,3 +69,33 @@ class HomeView(View):
             return render(request, 'result.html', context)
 
         return render(request, 'home.html', context)
+
+
+class AffiliateQRManageView(View):
+    @staticmethod
+    def get(request):
+        if request.GET.get('code'):
+            shortcode = request.GET['code']
+            url_obj = Url.objects.filter(short=shortcode).first()
+            if url_obj:
+                params = urllib.parse.parse_qs(urllib.parse.urlparse(url_obj.url).query)
+            else:
+                params = None
+            return render(request, 'affiliate.html', {'url_obj': url_obj, 'code': shortcode, 'params': params,
+                                                      'GOOGLE_MAPS_API_KEY': config('GOOGLE_MAPS_API_KEY')})
+        return render(request, 'affiliate.html')
+
+    @staticmethod
+    def post(request):
+        data = request.POST
+        shortcode = data.get('code')
+        affiliate_unique_code = data.get('affiliate_unique_code')
+        latitude = data.get('lat')
+        longitude = data.get('lng')
+
+        url_obj = Url.objects.get(short=shortcode)
+        url = "https://halanx.com/find-my-dream-home?ref_id={}&lat={}&lng={}".format(affiliate_unique_code,
+                                                                                     latitude, longitude)
+        url_obj.url = url
+        url_obj.save()
+        return redirect(request.path + "?" + urllib.parse.urlencode({'code': shortcode}))

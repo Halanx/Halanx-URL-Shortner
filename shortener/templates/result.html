@@ -1,6 +1,9 @@
 {% extends 'base.html' %}
+
 {% block title %}
+    {{ Result }}
 {% endblock %}
+
 {% block content %}
     <div class="text-center">
         <h1>Shortening Result</h1>
@@ -9,9 +12,9 @@
             <p>{{ error }}</p>
         {% endif %}
         {% if object %}
-            <p>Original_URL : {{ object.url }}</p>
+            <p>Original URL : {{ object.url }}</p>
             <div>
-                <input id='short-link' type="text" value="{{ object.get_short_url }}">
+                <input class="text-center" id='short-link' type="text" value="{{ object.get_short_url }}">
             </div>
             <img src="{{ object.get_short_url }}qrcode.png" height="100" width="100">
         {% endif %}

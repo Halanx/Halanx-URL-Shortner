@@ -1,6 +1,6 @@
 Django==2.2.1
 django-cors-headers==3.0.1
-django-debug-toolbar==1.11
+django-debug-toolbar==1.11.1
 django-storages==1.7.1
 djangorestframework==3.9.4
 Pillow==6.0.0
